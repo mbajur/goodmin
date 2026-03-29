@@ -205,6 +205,10 @@ module Goodmin
         def association_option_texts
           @association_option_texts || {}
         end
+
+        def additional_permitted_attributes(record = nil)
+          []
+        end
       end
     end
   end

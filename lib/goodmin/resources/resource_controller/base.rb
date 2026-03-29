@@ -123,7 +123,7 @@ module Goodmin
         end
 
         def resource_params_defaults
-          @resource_service.attrs_for_form.map do |attribute|
+          defaults = @resource_service.attrs_for_form.map do |attribute|
             association = @resource_class.reflect_on_association(attribute.name)
 
             if association && association.macro == :belongs_to
@@ -140,6 +140,8 @@ module Goodmin
               attribute.name
             end
           end
+
+          defaults + @resource_service.class.additional_permitted_attributes(@resource)
         end
 
         def array_attribute?(attr_name)
@@ -170,7 +172,8 @@ module Goodmin
         def nested_attribute_permit_list(association)
           service_class = Goodmin::ServiceLocator.find_service_class_for(association.klass, context_service_class: @resource_service.class)
           attrs = service_class&.attrs_for_form || []
-          [:id, :_destroy] + attrs.map(&:name)
+          additional = service_class&.additional_permitted_attributes || []
+          [:id, :_destroy] + attrs.map(&:name) + additional
         end
 
         def many_to_many_association?(association)
