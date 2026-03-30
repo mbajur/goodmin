@@ -33,7 +33,7 @@
         <% if policy(options[:class_name].constantize).index? %>
           <li>
             <%= link_to(options[:class_name].constantize.model_name.human(count: 2),
-              send("#{@resource_class.name.underscore}_#{name}_path", @resource),
+              polymorphic_path([*@resource_parents, @resource, options[:class_name].constantize]),
               class: "dropdown-item") %>
           </li>
         <% end %>

@@ -1,25 +1,21 @@
 module Goodmin
   module Resources
-    class CommentResource
+    class TagResource
       include Goodmin::Resources::Resource
 
       index do
         attribute :id
-        attribute :title
+        attribute :name
       end
 
       show do
         attribute :id
-        attribute :title
-        attribute :body
+        attribute :name
       end
 
       form do
-        attribute :title
-        attribute :body
+        attribute :name
       end
-
-      has_many :tags
     end
   end
 end

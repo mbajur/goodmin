@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_03_24_000000) do
+ActiveRecord::Schema.define(version: 2026_03_29_000000) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "email"
@@ -65,4 +65,12 @@ ActiveRecord::Schema.define(version: 2026_03_24_000000) do
 
   add_foreign_key "comments", "articles"
   add_foreign_key "profiles", "articles"
+
+  create_table "tags", force: :cascade do |t|
+    t.integer "comment_id"
+    t.string "name"
+    t.index ["comment_id"], name: "index_tags_on_comment_id"
+  end
+
+  add_foreign_key "tags", "comments"
 end

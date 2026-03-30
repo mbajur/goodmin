@@ -2,12 +2,12 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb mb-0">
       <% if @resource_parents %>
-        <% @resource_parents.each do |parent| %>
+        <% @resource_parents.each_with_index do |parent, i| %>
           <li class="breadcrumb-item">
-            <%= link_to parent.class.model_name.human(count: 2), parent.class %>
+            <%= link_to parent.class.model_name.human(count: 2), polymorphic_path([*@resource_parents[0...i], parent.class]) %>
           </li>
           <li class="breadcrumb-item">
-            <%= link_to resource_display_name(parent), parent %>
+            <%= link_to resource_display_name(parent), polymorphic_path([*@resource_parents[0...i], parent]) %>
           </li>
         <% end %>
       <% end %>
