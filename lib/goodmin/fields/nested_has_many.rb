@@ -26,6 +26,14 @@ module Goodmin
         options.fetch(:allow_add_new, true)
       end
 
+      def legend
+        options.fetch(:legend, attribute.to_s.humanize)
+      end
+
+      def show_legend?
+        !legend.nil? && legend != false
+      end
+
       protected
 
       def nested_record_instance

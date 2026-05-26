@@ -150,5 +150,46 @@ module Goodmin
 
       assert field.show_add_new_button?
     end
+
+    def test_legend_defaults_to_humanized_attribute
+      assert_equal "Comments", @field.legend
+    end
+
+    def test_legend_can_be_customized_with_option
+      field = Fields::NestedHasMany.new(
+        attribute: :comments,
+        record: @record,
+        resource_service: @resource_service,
+        legend: "Custom comments"
+      )
+
+      assert_equal "Custom comments", field.legend
+    end
+
+    def test_show_legend_is_enabled_by_default
+      assert @field.show_legend?
+    end
+
+    def test_show_legend_can_be_disabled_with_nil_legend
+      field = Fields::NestedHasMany.new(
+        attribute: :comments,
+        record: @record,
+        resource_service: @resource_service,
+        legend: nil
+      )
+
+      refute field.show_legend?
+    end
+
+    def test_show_legend_can_be_disabled_with_false_legend
+      field = Fields::NestedHasMany.new(
+        attribute: :comments,
+        record: @record,
+        resource_service: @resource_service,
+        legend: false
+      )
+
+      refute field.show_legend?
+    end
   end
 end
