@@ -19,14 +19,10 @@ module Goodmin
       end
 
       def show_destroy_button?
-        return !options[:disable_destroy] if options.key?(:disable_destroy)
-
         options.fetch(:allow_destroy, true)
       end
 
       def show_add_new_button?
-        return !options[:disable_add_new] if options.key?(:disable_add_new)
-
         options.fetch(:allow_add_new, true)
       end
 

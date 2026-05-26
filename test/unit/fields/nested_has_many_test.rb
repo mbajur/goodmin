@@ -114,15 +114,15 @@ module Goodmin
       refute field.show_destroy_button?
     end
 
-    def test_show_destroy_button_can_be_disabled_with_disable_destroy
+    def test_show_destroy_button_can_be_enabled_with_allow_destroy
       field = Fields::NestedHasMany.new(
         attribute: :comments,
         record: @record,
         resource_service: @resource_service,
-        disable_destroy: true
+        allow_destroy: true
       )
 
-      refute field.show_destroy_button?
+      assert field.show_destroy_button?
     end
 
     def test_show_add_new_button_is_enabled_by_default
@@ -140,15 +140,15 @@ module Goodmin
       refute field.show_add_new_button?
     end
 
-    def test_show_add_new_button_can_be_disabled_with_disable_add_new
+    def test_show_add_new_button_can_be_enabled_with_allow_add_new
       field = Fields::NestedHasMany.new(
         attribute: :comments,
         record: @record,
         resource_service: @resource_service,
-        disable_add_new: true
+        allow_add_new: true
       )
 
-      refute field.show_add_new_button?
+      assert field.show_add_new_button?
     end
   end
 end
