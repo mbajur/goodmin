@@ -98,5 +98,57 @@ module Goodmin
       )
       assert_instance_of custom_resource, field.associated_service
     end
+
+    def test_show_destroy_button_is_enabled_by_default
+      assert @field.show_destroy_button?
+    end
+
+    def test_show_destroy_button_can_be_disabled_with_allow_destroy
+      field = Fields::NestedHasMany.new(
+        attribute: :comments,
+        record: @record,
+        resource_service: @resource_service,
+        allow_destroy: false
+      )
+
+      refute field.show_destroy_button?
+    end
+
+    def test_show_destroy_button_can_be_disabled_with_disable_destroy
+      field = Fields::NestedHasMany.new(
+        attribute: :comments,
+        record: @record,
+        resource_service: @resource_service,
+        disable_destroy: true
+      )
+
+      refute field.show_destroy_button?
+    end
+
+    def test_show_add_new_button_is_enabled_by_default
+      assert @field.show_add_new_button?
+    end
+
+    def test_show_add_new_button_can_be_disabled_with_allow_add_new
+      field = Fields::NestedHasMany.new(
+        attribute: :comments,
+        record: @record,
+        resource_service: @resource_service,
+        allow_add_new: false
+      )
+
+      refute field.show_add_new_button?
+    end
+
+    def test_show_add_new_button_can_be_disabled_with_disable_add_new
+      field = Fields::NestedHasMany.new(
+        attribute: :comments,
+        record: @record,
+        resource_service: @resource_service,
+        disable_add_new: true
+      )
+
+      refute field.show_add_new_button?
+    end
   end
 end
