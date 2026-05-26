@@ -1,5 +1,7 @@
 <fieldset data-controller="nested-form">
-  <legend><%= field.attribute.to_s.humanize %></legend>
+  <% if field.show_legend? %>
+    <legend><%= field.legend %></legend>
+  <% end %>
 
   <template data-nested-form-target="template">
     <%= f.fields_for field.attribute, field.new_record, child_index: "NEW_RECORD" do |nested_f| %>
