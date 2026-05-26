@@ -18,6 +18,14 @@ module Goodmin
         associated_service&.form_nodes || []
       end
 
+      def show_destroy_button?
+        options.fetch(:allow_destroy, true)
+      end
+
+      def show_add_new_button?
+        options.fetch(:allow_add_new, true)
+      end
+
       protected
 
       def nested_record_instance
