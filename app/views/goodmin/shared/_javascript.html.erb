@@ -1,0 +1,11 @@
+<script>
+  (() => {
+    const storedTheme = localStorage.getItem("theme")
+    const selectedTheme = storedTheme || "auto"
+    const resolvedTheme = selectedTheme === "auto"
+      ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+      : selectedTheme
+
+    document.documentElement.setAttribute("data-bs-theme", resolvedTheme)
+  })()
+</script>
