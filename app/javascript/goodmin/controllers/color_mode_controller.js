@@ -36,6 +36,8 @@ export default class extends Controller {
   }
 
   updateControls(activeTheme) {
+    if (!this.hasMenuItemTarget || !this.hasToggleTarget) return
+
     this.menuItemTargets.forEach(menuItem => {
       const isActive = menuItem.dataset.theme === activeTheme
       menuItem.classList.toggle("active", isActive)
