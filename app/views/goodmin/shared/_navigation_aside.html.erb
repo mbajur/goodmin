@@ -1,3 +1,5 @@
+<%= render "goodmin/shared/color_mode" %>
+
 <% if authentication_enabled? &&
       admin_user.singleton_class.include?(Goodmin::Authentication::User) &&
       admin_user_signed_in? %>
