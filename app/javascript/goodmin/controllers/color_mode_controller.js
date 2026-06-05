@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 const DEFAULT_THEME = "auto"
 const DEFAULT_THEME_LABEL = "Auto"
+const VALID_THEMES = ["light", "dark", DEFAULT_THEME]
 
 export default class extends Controller {
   static targets = ["toggle", "menuItem"]
@@ -50,6 +51,6 @@ export default class extends Controller {
   }
 
   normalizeTheme(theme) {
-    return ["light", "dark", DEFAULT_THEME].includes(theme) ? theme : DEFAULT_THEME
+    return VALID_THEMES.includes(theme) ? theme : DEFAULT_THEME
   }
 }
