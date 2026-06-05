@@ -8,6 +8,10 @@ export default class extends Controller {
   static targets = ["toggle", "toggleIcon", "menuItem"]
 
   connect() {
+    this.baseToggleLabel = this.hasToggleTarget
+      ? this.toggleTarget.getAttribute("aria-label") || ""
+      : ""
+
     this.mediaQuery = typeof window.matchMedia === "function"
       ? window.matchMedia("(prefers-color-scheme: dark)")
       : null
@@ -52,8 +56,8 @@ export default class extends Controller {
 
     if (activeIcon) this.toggleIconTarget.replaceChildren(activeIcon)
 
-    this.toggleTarget.setAttribute("aria-label", activeThemeLabel)
-    this.toggleTarget.setAttribute("title", activeThemeLabel)
+    this.toggleTarget.setAttribute("aria-label", this.baseToggleLabel ? `${this.baseToggleLabel}: ${activeThemeLabel}` : activeThemeLabel)
+    this.toggleTarget.setAttribute("title", this.baseToggleLabel ? `${this.baseToggleLabel}: ${activeThemeLabel}` : activeThemeLabel)
   }
 
   get storedTheme() {

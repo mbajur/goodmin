@@ -16,7 +16,7 @@
 
         let resolvedTheme = theme
         if (theme === "auto") {
-          resolvedTheme = window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+          resolvedTheme = window.matchMedia?.("(prefers-color-scheme: dark)")?.matches ? "dark" : "light"
         }
 
         document.documentElement.setAttribute("data-bs-theme", resolvedTheme)
