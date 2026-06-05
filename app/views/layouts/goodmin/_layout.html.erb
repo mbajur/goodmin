@@ -14,7 +14,10 @@
 
         if (!validThemes.includes(theme)) theme = "auto"
 
-        const resolvedTheme = theme === "auto" && window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : (theme === "auto" ? "light" : theme)
+        let resolvedTheme = theme
+        if (theme === "auto") {
+          resolvedTheme = window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+        }
 
         document.documentElement.setAttribute("data-bs-theme", resolvedTheme)
       })()
