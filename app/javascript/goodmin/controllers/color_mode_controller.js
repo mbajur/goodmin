@@ -1,17 +1,17 @@
 import { Controller } from "@hotwired/stimulus"
 
 const DEFAULT_THEME = "auto"
+const THEME_STORAGE_KEY = "goodmin-theme"
 const VALID_THEMES = ["light", "dark", DEFAULT_THEME]
-const THEME_LABELS = {
-  light: "Light",
-  dark: "Dark",
-  auto: "Auto"
-}
 
 export default class extends Controller {
   static targets = ["toggle", "toggleIcon", "menuItem"]
 
   connect() {
+    this.baseToggleLabel = this.hasToggleTarget
+      ? this.toggleTarget.getAttribute("aria-label") || ""
+      : ""
+
     this.mediaQuery = typeof window.matchMedia === "function"
       ? window.matchMedia("(prefers-color-scheme: dark)")
       : null
@@ -51,18 +51,18 @@ export default class extends Controller {
     })
 
     const activeItem = this.menuItemTargets.find(menuItem => menuItem.dataset.theme === activeTheme)
-    const activeThemeLabel = THEME_LABELS[activeTheme] || THEME_LABELS[DEFAULT_THEME]
+    const activeThemeLabel = activeItem?.querySelector("span:last-child")?.textContent?.trim() || DEFAULT_THEME
     const activeIcon = activeItem?.querySelector("[data-color-mode-icon]")?.cloneNode(true)
 
     if (activeIcon) this.toggleIconTarget.replaceChildren(activeIcon)
 
-    this.toggleTarget.setAttribute("aria-label", `Color theme: ${activeThemeLabel}`)
-    this.toggleTarget.setAttribute("title", `Color theme: ${activeThemeLabel}`)
+    this.toggleTarget.setAttribute("aria-label", this.baseToggleLabel ? `${this.baseToggleLabel}: ${activeThemeLabel}` : activeThemeLabel)
+    this.toggleTarget.setAttribute("title", this.baseToggleLabel ? `${this.baseToggleLabel}: ${activeThemeLabel}` : activeThemeLabel)
   }
 
   get storedTheme() {
     try {
-      return window.localStorage.getItem("theme")
+      return window.localStorage.getItem(THEME_STORAGE_KEY)
     } catch (error) {
       console.warn("Goodmin color mode preference could not be read.", error)
       return null
@@ -87,7 +87,7 @@ export default class extends Controller {
 
   storeTheme(theme) {
     try {
-      window.localStorage.setItem("theme", theme)
+      window.localStorage.setItem(THEME_STORAGE_KEY, theme)
     } catch (error) {
       console.warn("Goodmin color mode preference could not be stored.", error)
     }

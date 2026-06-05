@@ -33,6 +33,11 @@ en:
       signed_in: Signed in
       signed_out: Signed out
       failed_sign_in: Invalid credentials
+    color_mode:
+      choose: Choose color theme
+      light: Light
+      dark: Dark
+      auto: Auto
     flash:
       create: "%{resource} was successfully created"
       update: "%{resource} was successfully updated"
@@ -44,4 +49,3 @@ en:
       entries:
         zero: "No %{resource} found"
         other: "Showing %{count} out of %{total} %{resource}"
-
