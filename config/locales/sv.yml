@@ -33,6 +33,11 @@ sv:
       signed_in: Loggade in
       signed_out: Loggade ut
       failed_sign_in: Fel inloggningsuppgifter
+    color_mode:
+      choose: Välj färgtema
+      light: Ljust
+      dark: Mörkt
+      auto: Automatiskt
     flash:
       create: "%{resource} skapades"
       update: "%{resource} uppdaterades"
@@ -44,4 +49,3 @@ sv:
       entries:
         zero: "Inga %{resource} funna"
         other: "Visar %{count} av %{total} %{resource}"
-

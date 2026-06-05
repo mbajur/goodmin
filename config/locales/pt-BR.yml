@@ -33,6 +33,11 @@ pt-BR:
       signed_in: Conectado
       signed_out: Desconectado
       failed_sign_in: Credenciais inválidas
+    color_mode:
+      choose: Escolher tema de cores
+      light: Claro
+      dark: Escuro
+      auto: Automático
     flash:
       create: "%{resource} foi criado com sucesso"
       update: "%{resource} foi atualizado com sucesso"
@@ -44,4 +49,3 @@ pt-BR:
       entries:
         zero: "Nenhum %{resource} encontrado"
         other: "Exibindo %{count} de %{total} %{resource}"
-
